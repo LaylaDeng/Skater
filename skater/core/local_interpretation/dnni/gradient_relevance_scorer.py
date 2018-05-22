@@ -10,7 +10,7 @@ from skater.util.logger import build_logger
 from skater.util.logger import _INFO
 
 
-class BaseGradient(Initializer):
+class BaseGradientMethod(Initializer):
     """
     Base class for gradient-based relevance computation
 
@@ -18,16 +18,16 @@ class BaseGradient(Initializer):
     - https://github.com/marcoancona/DeepExplain/blob/master/deepexplain/tensorflow/methods.py
     """
 
-    __name__ = "BaseGradient"
+    __name__ = "BaseGradientMethod"
     logger = build_logger(_INFO, __name__)
 
     def _default_relevance_score(self):
-        BaseGradient.logger.debug("Computing default relevance score...")
+        BaseGradientMethod.logger.debug("Computing default relevance score...")
         return tf.gradients(self.output_tensor, self.input_tensor)
 
 
     def _run(self):
-        BaseGradient.logger.info("Executing operations ...")
+        BaseGradientMethod.logger.info("Executing operations ...")
         relevance_scores = self._default_relevance_score()
         results = self._session_run(relevance_scores, self.samples)
         return results[0]
@@ -35,11 +35,11 @@ class BaseGradient(Initializer):
 
     @classmethod
     def _non_linear_grad(cls, op, grad):
-        BaseGradient.logger.debug("Computing gradient with activation type {}".format(op.type))
+        BaseGradientMethod.logger.debug("Computing gradient with activation type {}".format(op.type))
         return cls._original_grad(op, grad)
 
 
-class LRP(BaseGradient):
+class LRP(BaseGradientMethod):
     """ LRP is technique to decompose the prediction(output) of a deep neural networks(DNNs) by computing relevance at
     each layer in a backward pass. Current implementation is computed using backpropagation by applying change rule on
     a modified gradient function. LRP could be implemented in different ways.
@@ -81,7 +81,7 @@ class LRP(BaseGradient):
         return grad * op_out / op_in
 
 
-class IntegratedGradients(BaseGradient):
+class IntegratedGradients(BaseGradientMethod):
     """ Integrated Gradient is a relevance scoring algorithm for Deep network based on final predictions to its input
     features. The algorithm statisfies two fundamental axioms related to relevance/attribution computation,
      1.Sensitivity : For every input and baseline, if the change in one feature causes the prediction to change,
@@ -107,6 +107,7 @@ class IntegratedGradients(BaseGradient):
         # Using black image or zero embedding vector for text as a default baseline, as suggested in the paper
         # Mukund Sundararajan, Ankir Taly, Qibi Yan. Axiomatic Attribution for Deep Networks(ICML2017)
         self.baseline = np.zeros((1,) + self.samples.shape[1:]) if baseline is None else baseline
+        self._validate_baseline()
 
 
     def _run(self):

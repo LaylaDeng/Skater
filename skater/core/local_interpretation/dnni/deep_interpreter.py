@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
-from skater.core.local_interpretation.dnni.relevance_scorer import BaseGradient
-from skater.core.local_interpretation.dnni.relevance_scorer import LRP
-from skater.core.local_interpretation.dnni.relevance_scorer import IntegratedGradients
+from skater.core.local_interpretation.dnni.gradient_relevance_scorer import BaseGradientMethod
+from skater.core.local_interpretation.dnni.gradient_relevance_scorer import LRP
+from skater.core.local_interpretation.dnni.gradient_relevance_scorer import IntegratedGradients
 from skater.core.local_interpretation.dnni.initializer import Initializer
 
 
@@ -22,7 +22,7 @@ def deep_interpreter_grad(op, grad):
     logger.debug("Computing gradient using DeepInterpretGrad")
     Initializer._grad_override_checkflag = 1
     if Initializer._enabled_method_class is not None \
-            and issubclass(Initializer._enabled_method_class, BaseGradient):
+            and issubclass(Initializer._enabled_method_class, BaseGradientMethod):
         logger.debug("Computing gradient using DeepInterpretGrad: {}".
                      format(Initializer._enabled_method_class._non_linear_grad))
         return Initializer._enabled_method_class._non_linear_grad(op, grad)
@@ -236,7 +236,7 @@ class DeepInterpreter(object):
         self.logger.info('DeepInterpreter: executing method {}'.format(method))
 
         result = method._run()
-        if issubclass(Initializer._enabled_method_class, BaseGradient) and Initializer._grad_override_checkflag == 0:
+        if issubclass(Initializer._enabled_method_class, BaseGradientMethod) and Initializer._grad_override_checkflag == 0:
             warnings.warn('Results may not reliable: As default gradient seems to have been used. '
                           'or you might have forgotten to create the graph within the DeepInterpreter context. '
                           'Be careful...')
