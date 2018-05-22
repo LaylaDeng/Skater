@@ -32,7 +32,7 @@ class Initializer(object):
         return self.session.run(output_tensor, feed_dict)
 
     def _validate_baseline(self):
-        if self.baseline is not None:
+        if self.baseline is not None & self.baseline.shape != ((1,) + self.samples.shape[1:]):
             if self.baseline.shape == self.samples.shape[1:]:
                 self.baseline = np.expand_dims(self.baseline, 0)
             else:
