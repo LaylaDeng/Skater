@@ -15,8 +15,6 @@ class BasePerturbationMethod(Initializer):
     """
     Base class for perturbation-based relevance/attribution computation
 
-    Reference
-    - https://github.com/marcoancona/DeepExplain/blob/master/deepexplain/tensorflow/methods.py
     """
 
     __name__ = "BasePerturbationMethod"
@@ -27,7 +25,10 @@ class BasePerturbationMethod(Initializer):
 
 
 class Occlusion(BasePerturbationMethod):
-
+    """
+    Reference
+    - https://github.com/marcoancona/DeepExplain/blob/master/deepexplain/tensorflow/methods.py
+    """
     __name__ = "Occlusion"
     logger = build_logger(_INFO, __name__)
 
@@ -67,8 +68,8 @@ class Occlusion(BasePerturbationMethod):
             # create a mask
             mask = np.ones(self.input_shape).flatten()
             mask[index.flatten()] = self.replace_value
-            masked_xs = mask.reshape((1,) + self.input_shape) * self.xs
-            delta = eval0 - self._run_input(masked_xs)
+            masked_input = mask.reshape((1,) + self.input_shape) * self.samples
+            delta = eval0 - self._run_input(masked_input)
             delta_aggregated = np.sum(delta.reshape((self.batch_size, -1)), -1, keepdims=True)
             heatmap[:, index.flatten()] += delta_aggregated
             return heatmap

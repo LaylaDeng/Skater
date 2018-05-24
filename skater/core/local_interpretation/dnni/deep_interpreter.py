@@ -2,6 +2,7 @@
 from skater.core.local_interpretation.dnni.gradient_relevance_scorer import BaseGradientMethod
 from skater.core.local_interpretation.dnni.gradient_relevance_scorer import LRP
 from skater.core.local_interpretation.dnni.gradient_relevance_scorer import IntegratedGradients
+from skater.core.local_interpretation.dnni.perturbation_relevance_scorer import Occlusion
 from skater.core.local_interpretation.dnni.initializer import Initializer
 
 
@@ -72,7 +73,8 @@ class DeepInterpreter(object):
         self.context_on = False
         self.__supported_relevance_type_dict = OrderedDict({
             'elrp': {'use_case_type': ['image'], 'method': LRP},
-            'ig': {'use_case_type': ['image', 'txt'], 'method': IntegratedGradients}
+            'ig': {'use_case_type': ['image', 'txt'], 'method': IntegratedGradients},
+            'occlusion': {'use_case_type': ['image'], 'method': Occlusion}
         })
 
 
