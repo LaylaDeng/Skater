@@ -31,7 +31,7 @@ class Initializer(object):
         feed_dict[self.input_tensor] = samples
         return self.session.run(output_tensor, feed_dict)
 
-    
+
     def _validate_baseline(self):
         if self.baseline is not None and self.baseline.shape != ((1,) + self.samples.shape[1:]):
             if self.baseline.shape == self.samples.shape[1:]:
