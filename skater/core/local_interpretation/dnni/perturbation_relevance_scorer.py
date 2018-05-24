@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 from skater.util.image_ops import view_windows
 from skater.core.local_interpretation.dnni.initializer import Initializer
 from skater.util.logger import build_logger
@@ -35,9 +36,9 @@ class Occlusion(BasePerturbationMethod):
 
     References
     ----------
-    .. [1] Ancona M, Ceolini E, Öztireli C, Gross M (ICLR, 2018).
+    .. [1] Ancona M, Ceolini E, Oztireli C, Gross M (ICLR, 2018).
     .. Towards better understanding of gradient-based attribution methods for Deep Neural Networks.
-    .. [2] Zeiler, M  and Fergus, R(Springer, 2014). Visualizing and understanding convolutional networks.
+    .. [2] Zeiler, M and Fergus, R (Springer, 2014). Visualizing and understanding convolutional networks.
     .. In European conference on computer vision, pp. 818–833.
     .. [3] https://github.com/marcoancona/DeepExplain/blob/master/deepexplain/tensorflow/methods.py
     """
