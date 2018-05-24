@@ -46,7 +46,7 @@ then
 fi
 # downloads the required R packages locally in the same directory as setup.py
 wget https://cran.r-project.org/src/contrib/Rcpp_0.12.{17..18}.tar.gz
-sudo R CMD INSTALL Rcpp_0.12.*.tar.gz
+sudo R CMD INSTALL Rcpp_0.12.17.tar.gz
 wget https://cran.r-project.org/src/contrib/Archive/arules/arules_1.5-5.tar.gz
 sudo R CMD INSTALL arules_1.5-5.tar.gz
 wget https://cran.r-project.org/src/contrib/sbrl_1.2.tar.gz
