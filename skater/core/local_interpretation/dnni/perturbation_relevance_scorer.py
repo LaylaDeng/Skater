@@ -30,10 +30,16 @@ class Occlusion(BasePerturbationMethod):
     by removing, masking or altering them), then running a forward pass on the new input to produce a new output,
     and then measuring and monitoring the difference between the original output and new output. Perturbation based
     interpretation helps one to compute direct estimation of the marginal effect of a feature but the inferrence might
-    be computationally expensive depending on the cardinatlity of the feature space.
+    be computationally expensive depending on the cardinatlity of the feature space. The choice of the baseline value
+    while perturbing through the feature space could be set to 0, as explained in detailed by Zeiler & Fergus, 2014[2].
 
-    Reference
-    - https://github.com/marcoancona/DeepExplain/blob/master/deepexplain/tensorflow/methods.py
+    References
+    ----------
+    .. [1] Ancona M, Ceolini E, Öztireli C, Gross M (ICLR, 2018).
+    .. Towards better understanding of gradient-based attribution methods for Deep Neural Networks.
+    .. [2] Zeiler, M  and Fergus, R(Springer, 2014). Visualizing and understanding convolutional networks.
+    .. In European conference on computer vision, pp. 818–833.
+    .. [3] https://github.com/marcoancona/DeepExplain/blob/master/deepexplain/tensorflow/methods.py
     """
     __name__ = "Occlusion"
     logger = build_logger(_INFO, __name__)
