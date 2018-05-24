@@ -166,8 +166,10 @@ def show_image(X, cmap=None, bins=None, title='Original'):
         raise (MatplotlibUnavailableError("Matplotlib is required but unavailable on the system."))
 
 
-padding_3d = lambda X, n_r, n_col, n_c: np.pad(X, ((0, n_r),(0, n_col), (0, n_c)), mode='constant', constant_values=0)
+padding_3d = lambda X, n_r, n_col, n_c: np.pad(X, ((0, n_r), (0, n_col), (0, n_c)), mode='constant', constant_values=0)
 padding_2d = lambda X, n_r, n_col: np.pad(X, ((0, n_r), (0, n_col)), mode='constant', constant_values=0)
+
+
 def view_windows(X, window_shape, steps):
     # Reference: https://codereview.stackexchange.com/questions/78156/moving-window-with-complete-boundary-in-python
     from skimage.util.shape import view_as_windows
@@ -179,5 +181,3 @@ def view_windows(X, window_shape, steps):
     X_extended = padding_3d(X, n_rows, n_cols, n_channel) if n_channel is not None else padding_2d(X, n_rows, n_cols)
     rolling_view = view_as_windows(X_extended, window_shape, steps)
     return rolling_view
-
-
