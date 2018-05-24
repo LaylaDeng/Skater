@@ -25,7 +25,13 @@ class BasePerturbationMethod(Initializer):
 
 
 class Occlusion(BasePerturbationMethod):
-    """
+    """ Occlusion is a perturbation based inferrence algorithm. Such forms of algorithm direcly computes the
+    relevance/attribution of the input features by systematically occluding different portions of the image (
+    by removing, masking or altering them), then running a forward pass on the new input to produce a new output,
+    and then measuring and monitoring the difference between the original output and new output. Perturbation based
+    interpretation helps one to compute direct estimation of the marginal effect of a feature but the inferrence might
+    be computationally expensive depending on the cardinatlity of the feature space.
+
     Reference
     - https://github.com/marcoancona/DeepExplain/blob/master/deepexplain/tensorflow/methods.py
     """
