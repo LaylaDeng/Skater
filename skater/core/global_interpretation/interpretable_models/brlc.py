@@ -1,6 +1,4 @@
 # coding=utf-8
-
-from skater.util import exceptions
 from rpy2.robjects.packages import importr
 from rpy2.robjects import pandas2ri
 import numbers
@@ -9,6 +7,7 @@ import pandas as pd
 import rpy2.robjects as ro
 pandas2ri.activate()
 
+from skater.util import exceptions
 
 class BRLC(object):
     """ :: Experimental :: The implementation is currently experimental and might change in future

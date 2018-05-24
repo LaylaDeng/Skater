@@ -85,7 +85,7 @@ def setup_package():
             'dill>=0.2.6',
             'wordcloud==1.3.1',
             'joblib==0.11',
-            'rpy2==2.9.3; python_version>"3.0"',
+            'rpy2==2.9.1; python_version>"3.0"',
             'Jinja2==2.10',
             'scikit-image==0.13.0',
             'bs4'],
