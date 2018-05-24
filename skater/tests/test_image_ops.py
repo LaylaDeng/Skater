@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from skimage.util import view_as_windows
+from skimage.util.shape import view_as_windows
 
 from skater.util.image_ops import view_windows
 
