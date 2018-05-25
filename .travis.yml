@@ -33,9 +33,9 @@ install:
   - pip install codecov # not on conda
   - pip install coveralls
   - if [[ "$TRAVIS_PYTHON_VERSION" > "3.0" ]]; then
-      python setup.py install --force-reinstall --ostype=linux-ubuntu --rl=True;
+      python setup.py install --force --ostype=linux-ubuntu --rl=True;
     else
-      python setup.py --force-reinstall install;
+      python setup.py install --force;
     fi
   - if [[ "$TRAVIS_PYTHON_VERSION" > "3.0" ]]; then
       python -m pip install --upgrade --force-reinstall tensorflow>=1.4.0;
