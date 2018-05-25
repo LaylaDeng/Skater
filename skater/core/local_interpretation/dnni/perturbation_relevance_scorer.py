@@ -86,4 +86,7 @@ class Occlusion(BasePerturbationMethod):
             delta = eval0 - self._run_input(masked_input)
             delta_aggregated = np.sum(delta.reshape((self.batch_size, -1)), -1, keepdims=True)
             heatmap[:, index.flatten()] += delta_aggregated
-            return heatmap
+            # aggregation here takes care of the window overlapping that occurs while rolling a window
+            normalizer[:, index.flatten()] += index.size
+        attribution = np.reshape(heatmap / normalizer, self.samples.shape)
+        return attribution

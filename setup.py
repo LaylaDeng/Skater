@@ -78,6 +78,7 @@ def setup_package():
         include_package_data=True,
         install_requires=[
             'scikit-learn>=0.18',
+            'scikit-image==0.13.0',
             'pandas>=0.22.0',
             'ds-lime>=0.1.1.21',
             'requests',
@@ -87,7 +88,6 @@ def setup_package():
             'joblib==0.11',
             'rpy2==2.9.1; python_version>"3.0"',
             'Jinja2==2.10',
-            'scikit-image==0.13.0',
             'bs4'],
         extras_require={
             'all':'matplotlib'
