@@ -29,12 +29,13 @@ before_install:
 install:
   - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION numpy scipy cython matplotlib h5py flake8 coverage
   - source activate test-environment
+  - conda install -c r rpy2
   - pip install codecov # not on conda
   - pip install coveralls
   - if [[ "$TRAVIS_PYTHON_VERSION" > "3.0" ]]; then
-      python setup.py install --ostype=linux-ubuntu --rl=True;
+      python setup.py install --force-reinstall --ostype=linux-ubuntu --rl=True;
     else
-      python setup.py install;
+      python setup.py --force-reinstall install;
     fi
   - if [[ "$TRAVIS_PYTHON_VERSION" > "3.0" ]]; then
       python -m pip install --upgrade --force-reinstall tensorflow>=1.4.0;

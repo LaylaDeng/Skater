@@ -73,6 +73,7 @@ class Occlusion(BasePerturbationMethod):
         # self.samples[0] returns the actual input shape (150, 150, 3)
         input_patches = view_windows(self.samples[0], self.window_shape, self.step).reshape((-1,) + self.window_shape)
         heatmap = np.zeros_like(self.samples, dtype=np.float32).reshape((-1), self.total_dim)
+        normalizer = np.zeros_like(heatmap)
 
         # Compute original output
         eval0 = self._session_run()
