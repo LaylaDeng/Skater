@@ -33,11 +33,6 @@ install:
   - pip install codecov # not on conda
   - pip install coveralls
   - if [[ "$TRAVIS_PYTHON_VERSION" > "3.0" ]]; then
-      python setup.py install --force --ostype=linux-ubuntu --rl=True;
-    else
-      python setup.py install --force;
-    fi
-  - if [[ "$TRAVIS_PYTHON_VERSION" > "3.0" ]]; then
       python -m pip install --upgrade --force-reinstall tensorflow>=1.4.0;
       python -W ignore -c "import tensorflow as tf";
     else
@@ -48,6 +43,11 @@ install:
        python -m pip install --upgrade --force-reinstall keras==2.0.8;
     else
        python -m pip install --upgrade --force-reinstall keras==2.0.8;
+    fi
+  - if [[ "$TRAVIS_PYTHON_VERSION" > "3.0" ]]; then
+       python setup.py install --ostype=linux-ubuntu --rl=True;
+    else
+       python setup.py install --force;
     fi
   - python -W ignore -c "import keras as k"
   - python -c "import scipy"
